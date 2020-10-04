@@ -56,7 +56,6 @@ class MainViewController: UIViewController {
     
     override func loadView() {
         super.loadView()
-        
         view.addSubview(manageButton)
         
         NSLayoutConstraint.activate([
@@ -69,13 +68,11 @@ class MainViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
         initAudioSession()
         // need to redister the AU
         WhiteNoiseGenerator.registerSubclass
         // the engine needs to be connected before start
         connectMixer()
-        engine.prepare()
         
         do { try self.engine.start() }
         catch { print(error) ; return }
@@ -96,7 +93,6 @@ class MainViewController: UIViewController {
     }
     
     private func disconnectUnit() {
-        // detach disconnect safely by default
         engine.detach(whiteNoiseGenerator)
     }
 }
