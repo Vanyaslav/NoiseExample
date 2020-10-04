@@ -7,23 +7,31 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A1474A7A2529E30200A734E5 /* StringUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1474A792529E30200A734E5 /* StringUtils.swift */; };
 		A173BC8825299F8B0091B483 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A173BC8725299F8B0091B483 /* AppDelegate.swift */; };
-		A173BC8A25299F8B0091B483 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A173BC8925299F8B0091B483 /* SceneDelegate.swift */; };
-		A173BC8C25299F8B0091B483 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A173BC8B25299F8B0091B483 /* ViewController.swift */; };
-		A173BC8F25299F8B0091B483 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A173BC8D25299F8B0091B483 /* Main.storyboard */; };
+		A173BC8C25299F8B0091B483 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A173BC8B25299F8B0091B483 /* MainViewController.swift */; };
 		A173BC9125299F8C0091B483 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A173BC9025299F8C0091B483 /* Assets.xcassets */; };
 		A173BC9425299F8C0091B483 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A173BC9225299F8C0091B483 /* LaunchScreen.storyboard */; };
+		A173BC9D2529AFD90091B483 /* AtomicWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A173BC9C2529AFD90091B483 /* AtomicWrapper.swift */; };
+		A173BCA02529B2680091B483 /* WhiteNoiseGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A173BC9F2529B2680091B483 /* WhiteNoiseGenerator.swift */; };
+		A173BCAC2529B5CD0091B483 /* AudioKernel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A173BCAB2529B5CD0091B483 /* AudioKernel.swift */; };
+		A173BCAF2529BCB30091B483 /* WhiteNoiseGenerator+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A173BCAE2529BCB30091B483 /* WhiteNoiseGenerator+Utils.swift */; };
+		A173BCB22529BCE00091B483 /* WhiteNoiseGenerator+Render.swift in Sources */ = {isa = PBXBuildFile; fileRef = A173BCB12529BCE00091B483 /* WhiteNoiseGenerator+Render.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A1474A792529E30200A734E5 /* StringUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringUtils.swift; sourceTree = "<group>"; };
 		A173BC8425299F8B0091B483 /* NoiseExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NoiseExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A173BC8725299F8B0091B483 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		A173BC8925299F8B0091B483 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		A173BC8B25299F8B0091B483 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		A173BC8E25299F8B0091B483 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		A173BC8B25299F8B0091B483 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		A173BC9025299F8C0091B483 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A173BC9325299F8C0091B483 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A173BC9525299F8C0091B483 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A173BC9C2529AFD90091B483 /* AtomicWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomicWrapper.swift; sourceTree = "<group>"; };
+		A173BC9F2529B2680091B483 /* WhiteNoiseGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhiteNoiseGenerator.swift; sourceTree = "<group>"; };
+		A173BCAB2529B5CD0091B483 /* AudioKernel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioKernel.swift; sourceTree = "<group>"; };
+		A173BCAE2529BCB30091B483 /* WhiteNoiseGenerator+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WhiteNoiseGenerator+Utils.swift"; sourceTree = "<group>"; };
+		A173BCB12529BCE00091B483 /* WhiteNoiseGenerator+Render.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WhiteNoiseGenerator+Render.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +64,59 @@
 		A173BC8625299F8B0091B483 /* NoiseExample */ = {
 			isa = PBXGroup;
 			children = (
+				A173BCA62529B5300091B483 /* Audio */,
+				A173BCA72529B5450091B483 /* Resources */,
+				A173BCA32529B4B40091B483 /* Support */,
 				A173BC8725299F8B0091B483 /* AppDelegate.swift */,
-				A173BC8925299F8B0091B483 /* SceneDelegate.swift */,
-				A173BC8B25299F8B0091B483 /* ViewController.swift */,
-				A173BC8D25299F8B0091B483 /* Main.storyboard */,
-				A173BC9025299F8C0091B483 /* Assets.xcassets */,
+				A173BC8B25299F8B0091B483 /* MainViewController.swift */,
+			);
+			path = NoiseExample;
+			sourceTree = "<group>";
+		};
+		A173BCA22529B4A40091B483 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				A173BC9C2529AFD90091B483 /* AtomicWrapper.swift */,
+				A173BCAB2529B5CD0091B483 /* AudioKernel.swift */,
+				A1474A792529E30200A734E5 /* StringUtils.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		A173BCA32529B4B40091B483 /* Support */ = {
+			isa = PBXGroup;
+			children = (
 				A173BC9225299F8C0091B483 /* LaunchScreen.storyboard */,
 				A173BC9525299F8C0091B483 /* Info.plist */,
 			);
-			path = NoiseExample;
+			path = Support;
+			sourceTree = "<group>";
+		};
+		A173BCA62529B5300091B483 /* Audio */ = {
+			isa = PBXGroup;
+			children = (
+				A173BCAA2529B5A50091B483 /* WhiteNoise */,
+				A173BCA22529B4A40091B483 /* Utils */,
+			);
+			path = Audio;
+			sourceTree = "<group>";
+		};
+		A173BCA72529B5450091B483 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				A173BC9025299F8C0091B483 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		A173BCAA2529B5A50091B483 /* WhiteNoise */ = {
+			isa = PBXGroup;
+			children = (
+				A173BC9F2529B2680091B483 /* WhiteNoiseGenerator.swift */,
+				A173BCAE2529BCB30091B483 /* WhiteNoiseGenerator+Utils.swift */,
+				A173BCB12529BCE00091B483 /* WhiteNoiseGenerator+Render.swift */,
+			);
+			path = WhiteNoise;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -126,7 +178,6 @@
 			files = (
 				A173BC9425299F8C0091B483 /* LaunchScreen.storyboard in Resources */,
 				A173BC9125299F8C0091B483 /* Assets.xcassets in Resources */,
-				A173BC8F25299F8B0091B483 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -137,23 +188,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A173BC8C25299F8B0091B483 /* ViewController.swift in Sources */,
+				A1474A7A2529E30200A734E5 /* StringUtils.swift in Sources */,
+				A173BCB22529BCE00091B483 /* WhiteNoiseGenerator+Render.swift in Sources */,
+				A173BC9D2529AFD90091B483 /* AtomicWrapper.swift in Sources */,
+				A173BCAC2529B5CD0091B483 /* AudioKernel.swift in Sources */,
+				A173BC8C25299F8B0091B483 /* MainViewController.swift in Sources */,
 				A173BC8825299F8B0091B483 /* AppDelegate.swift in Sources */,
-				A173BC8A25299F8B0091B483 /* SceneDelegate.swift in Sources */,
+				A173BCA02529B2680091B483 /* WhiteNoiseGenerator.swift in Sources */,
+				A173BCAF2529BCB30091B483 /* WhiteNoiseGenerator+Utils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		A173BC8D25299F8B0091B483 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				A173BC8E25299F8B0091B483 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		A173BC9225299F8C0091B483 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -286,14 +334,17 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = NoiseExample/NoiseExample.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = NoiseExample/Info.plist;
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = NoiseExample/Support/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.vanya.NoiseExample;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tomasbaculak.noise.white.example;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -304,14 +355,17 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = NoiseExample/NoiseExample.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = NoiseExample/Info.plist;
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = NoiseExample/Support/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.vanya.NoiseExample;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tomasbaculak.noise.white.example;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
