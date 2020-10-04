@@ -28,6 +28,26 @@ extension MainViewController {
         }
     }
 }
+// engine operations
+extension MainViewController {
+    private func connectMixer() {
+        engine.attach(generatorMixer)
+        engine.connect(generatorMixer,
+                       to: engine.mainMixerNode,
+                       format: nil)
+    }
+    
+    private func connectUnit() {
+        engine.attach(whiteNoiseGenerator)
+        engine.connect(whiteNoiseGenerator,
+                       to: generatorMixer,
+                       format: nil)
+    }
+    
+    private func disconnectUnit() {
+        engine.detach(whiteNoiseGenerator)
+    }
+}
 
 class MainViewController: UIViewController {
     private lazy var manageButton: UIButton = {
@@ -69,31 +89,13 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initAudioSession()
-        // need to redister the AU
+        // need to register the AU
         WhiteNoiseGenerator.registerSubclass
-        // the engine needs to be connected before start
+        // the engine has to be connected before start
         connectMixer()
         
         do { try self.engine.start() }
         catch { print(error) ; return }
-    }
-    
-    private func connectMixer() {
-        engine.attach(generatorMixer)
-        engine.connect(generatorMixer,
-                       to: engine.mainMixerNode,
-                       format: nil)
-    }
-    
-    private func connectUnit() {
-        engine.attach(whiteNoiseGenerator)
-        engine.connect(whiteNoiseGenerator,
-                       to: generatorMixer,
-                       format: nil)
-    }
-    
-    private func disconnectUnit() {
-        engine.detach(whiteNoiseGenerator)
     }
 }
 
