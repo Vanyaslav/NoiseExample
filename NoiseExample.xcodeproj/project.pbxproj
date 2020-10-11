@@ -19,6 +19,7 @@
 		A173BCAC2529B5CD0091B483 /* AudioUnitSampleKernel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A173BCAB2529B5CD0091B483 /* AudioUnitSampleKernel.swift */; };
 		A173BCAF2529BCB30091B483 /* WhiteNoiseGenerator+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A173BCAE2529BCB30091B483 /* WhiteNoiseGenerator+Utils.swift */; };
 		A173BCB22529BCE00091B483 /* WhiteNoiseGenerator+Render.swift in Sources */ = {isa = PBXBuildFile; fileRef = A173BCB12529BCE00091B483 /* WhiteNoiseGenerator+Render.swift */; };
+		A19F5961253347EB004ABB3A /* MainViewController+AudioSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19F5960253347EB004ABB3A /* MainViewController+AudioSession.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		A173BCAB2529B5CD0091B483 /* AudioUnitSampleKernel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioUnitSampleKernel.swift; sourceTree = "<group>"; };
 		A173BCAE2529BCB30091B483 /* WhiteNoiseGenerator+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WhiteNoiseGenerator+Utils.swift"; sourceTree = "<group>"; };
 		A173BCB12529BCE00091B483 /* WhiteNoiseGenerator+Render.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WhiteNoiseGenerator+Render.swift"; sourceTree = "<group>"; };
+		A19F5960253347EB004ABB3A /* MainViewController+AudioSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainViewController+AudioSession.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,11 +79,11 @@
 		A173BC8625299F8B0091B483 /* NoiseExample */ = {
 			isa = PBXGroup;
 			children = (
+				A19F5962253354FA004ABB3A /* Scene */,
 				A173BCA62529B5300091B483 /* Audio */,
 				A173BCA72529B5450091B483 /* Resources */,
 				A173BCA32529B4B40091B483 /* Support */,
 				A173BC8725299F8B0091B483 /* AppDelegate.swift */,
-				A173BC8B25299F8B0091B483 /* MainViewController.swift */,
 			);
 			path = NoiseExample;
 			sourceTree = "<group>";
@@ -131,6 +133,15 @@
 				A1474A8E252A77B700A734E5 /* WhiteNoiseGenerator+Data.swift */,
 			);
 			path = WhiteNoise;
+			sourceTree = "<group>";
+		};
+		A19F5962253354FA004ABB3A /* Scene */ = {
+			isa = PBXGroup;
+			children = (
+				A173BC8B25299F8B0091B483 /* MainViewController.swift */,
+				A19F5960253347EB004ABB3A /* MainViewController+AudioSession.swift */,
+			);
+			path = Scene;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -203,6 +214,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A1474A7A2529E30200A734E5 /* StringUtils.swift in Sources */,
+				A19F5961253347EB004ABB3A /* MainViewController+AudioSession.swift in Sources */,
 				A173BCB22529BCE00091B483 /* WhiteNoiseGenerator+Render.swift in Sources */,
 				A173BC9D2529AFD90091B483 /* AtomicWrapper.swift in Sources */,
 				A173BCAC2529B5CD0091B483 /* AudioUnitSampleKernel.swift in Sources */,
