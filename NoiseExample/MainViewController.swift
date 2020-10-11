@@ -9,6 +9,10 @@ import UIKit
 import AVFoundation
 
 extension MainViewController {
+    static let defaultVolume: Float = 0.3
+}
+
+extension MainViewController {
     private func initAudioSession() {
         let session = AVAudioSession.sharedInstance()
         
@@ -16,7 +20,10 @@ extension MainViewController {
             try session.setCategory(.playback,
                                     mode: AVAudioSession.Mode.default,
                                     options: .interruptSpokenAudioAndMixWithOthers)
-            try session.setPreferredSampleRate(WhiteNoiseGenerator.audioFormat!.sampleRate)
+            guard let format = KernelAudioUnit.audioFormat else {
+                return
+            }
+            try session.setPreferredSampleRate(format.sampleRate)
         } catch let error {
             NSLog("Failed to set category on AVAudioSession error: %@", error.localizedDescription)
         }
@@ -35,6 +42,7 @@ extension MainViewController {
         engine.connect(generatorMixer,
                        to: engine.mainMixerNode,
                        format: nil)
+        generatorMixer.outputVolume = MainViewController.defaultVolume
     }
     
     private func connectUnit() {
@@ -54,6 +62,7 @@ class MainViewController: UIViewController {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.titleLabel?.font = .systemFont(ofSize: 40)
+        button.setTitleColor(.label, for: .normal)
         button.addTarget(self,
                          action: #selector(manageNoise(_:)),
                          for: .touchUpInside)
@@ -70,6 +79,20 @@ class MainViewController: UIViewController {
             : connectUnit()
     }
     
+    private lazy var volumeSlider: UISlider = {
+        let slider = UISlider()
+        slider.translatesAutoresizingMaskIntoConstraints = false
+        slider.addTarget(self,
+                         action: #selector(manageVolume(_:)),
+                         for: .valueChanged)
+        slider.value = MainViewController.defaultVolume
+        return slider
+    }()
+    
+    @objc func manageVolume(_ slider: UISlider) {
+        generatorMixer.outputVolume = slider.value
+    }
+    
     private lazy var whiteNoiseGenerator = WhiteNoiseGenerator.loadUnit()
     private let generatorMixer = AVAudioMixerNode()
     private let engine = AVAudioEngine()
@@ -77,17 +100,31 @@ class MainViewController: UIViewController {
     override func loadView() {
         super.loadView()
         view.addSubview(manageButton)
+        view.addSubview(volumeSlider)
         
         NSLayoutConstraint.activate([
             manageButton.centerYAnchor
                 .constraint(equalTo: view.centerYAnchor),
             manageButton.centerXAnchor
-                .constraint(equalTo: view.centerXAnchor)
+                .constraint(equalTo: view.centerXAnchor),
+            
+            volumeSlider.leadingAnchor
+                .constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor,
+                            constant: 10),
+            volumeSlider.trailingAnchor
+                .constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor,
+                            constant: -10),
+            volumeSlider.bottomAnchor
+                .constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor,
+                            constant: -30)
+            
         ])
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .systemGray6
+        
         initAudioSession()
         // need to register the AU
         WhiteNoiseGenerator.registerSubclass
