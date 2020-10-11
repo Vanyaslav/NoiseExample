@@ -7,6 +7,11 @@
 
 import AVFoundation
 
+extension KernelAudioUnit {
+    static let audioFormat = AVAudioFormat(standardFormatWithSampleRate: 44100.0,
+                                           channels: 2)
+}
+
 class KernelAudioUnit: AUAudioUnit {
     // MARK: - Private
     private let _kernel: AudioUnitSampleKernel = AudioUnitSampleKernel()
@@ -56,7 +61,7 @@ class KernelAudioUnit: AUAudioUnit {
         
         do {
             try super.init(componentDescription: componentDescription, options: options)
-            guard let format = WhiteNoiseGenerator.audioFormat else {
+            guard let format = KernelAudioUnit.audioFormat else {
                 abort()
             }
             let bus = try AUAudioUnitBus(format: format)

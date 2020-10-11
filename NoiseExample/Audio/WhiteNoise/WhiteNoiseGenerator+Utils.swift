@@ -8,11 +8,6 @@
 import AVFoundation
 
 extension WhiteNoiseGenerator {
-    static let audioFormat = AVAudioFormat(standardFormatWithSampleRate: 44100.0,
-                                           channels: 2)
-}
-
-extension WhiteNoiseGenerator {
     static let audioComponentDescription = AudioComponentDescription(
         componentType: kAudioUnitType_Generator,
         componentSubType: hfsTypeCode("wngn"),
