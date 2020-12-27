@@ -6,11 +6,7 @@
 //
 
 import AVFoundation
-
-extension KernelAudioUnit {
-    static let audioFormat = AVAudioFormat(standardFormatWithSampleRate: 44100.0,
-                                           channels: 2)
-}
+import CoreAudio
 
 class KernelAudioUnit: AUAudioUnit {
     // MARK: - Private
@@ -61,7 +57,7 @@ class KernelAudioUnit: AUAudioUnit {
         
         do {
             try super.init(componentDescription: componentDescription, options: options)
-            guard let format = KernelAudioUnit.audioFormat else {
+            guard let format = audioFormat() else {
                 abort()
             }
             let bus = try AUAudioUnitBus(format: format)
@@ -104,11 +100,7 @@ class KernelAudioUnit: AUAudioUnit {
     
     // MARK: - Accessor
     var kernelRenderBlock: KernelRenderBlock? {
-        get {
-            return _kernel.renderBlock
-        }
-        set {
-            _kernel.renderBlock = newValue
-        }
+        get { _kernel.renderBlock }
+        set { _kernel.renderBlock = newValue }
     }
 }

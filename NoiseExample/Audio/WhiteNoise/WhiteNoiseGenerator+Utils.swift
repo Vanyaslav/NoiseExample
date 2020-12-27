@@ -10,11 +10,11 @@ import AVFoundation
 extension WhiteNoiseGenerator {
     static let audioComponentDescription = AudioComponentDescription(
         componentType: kAudioUnitType_Generator,
-        componentSubType: hfsTypeCode("wngn"),
-        componentManufacturer: hfsTypeCode("Test"),
+        componentSubType: "wngn".hfsTypeCode,
+        componentManufacturer: "Test".hfsTypeCode,
         componentFlags: 0,
         componentFlagsMask: 0
-    );
+    )
     
     static let registerSubclass: Void = {
         AUAudioUnit.registerSubclass(

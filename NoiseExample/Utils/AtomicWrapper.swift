@@ -9,8 +9,10 @@ import Foundation
 
 @propertyWrapper
 struct Atomic<Value> {
-    private var value: Value
-    private let lock = NSLock()
+    private
+    var value: Value
+    private
+    let lock = NSLock()
 
     init(wrappedValue value: Value) {
         self.value = value

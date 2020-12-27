@@ -7,8 +7,11 @@
 
 import AVFoundation
 
+extension KernelAudioUnit: AudioSessionProtocol {}
+
 class WhiteNoiseGenerator: KernelAudioUnit {
     static func loadUnit() -> AVAudioUnit {
+        registerSubclass
         var audioUnit: AVAudioUnit?
         AVAudioUnit.instantiate(with: audioComponentDescription,
                                 options: AudioComponentInstantiationOptions(rawValue: 0))
