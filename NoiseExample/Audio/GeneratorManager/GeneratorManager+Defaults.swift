@@ -9,7 +9,7 @@ import AVFoundation
 
 // default settings
 extension GeneratorManager {
-    var defaultVolume: Float { 0.15 }
+    var defaultVolume: Float { 0.1 }
 }
 
 extension GeneratorManager: AudioSessionProtocol {}

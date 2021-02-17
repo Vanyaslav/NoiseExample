@@ -29,7 +29,8 @@ struct Atomic<Value> {
         return value
     }
 
-    mutating func store(newValue: Value) {
+    mutating
+    func store(newValue: Value) {
         lock.lock()
         defer { lock.unlock() }
         value = newValue

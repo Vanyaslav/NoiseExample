@@ -21,7 +21,7 @@ class WhiteNoiseGenerator: KernelAudioUnit {
                 return
             }
             
-            guard let generatorUnit = audioUnitNode.auAudioUnit as? WhiteNoiseGenerator else {
+            guard let generatorUnit = audioUnitNode.auAudioUnit as? Self else {
                 return
             }
     

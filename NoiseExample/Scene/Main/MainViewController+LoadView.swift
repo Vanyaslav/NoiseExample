@@ -11,8 +11,8 @@ extension MainViewController {
     override func loadView() {
         super.loadView()
         
-        view.addSubview(manageButton)
-        view.addSubview(volumeSlider)
+        [manageButton, volumeSlider]
+            .forEach(view.addSubview)
         
         NSLayoutConstraint.activate([
             manageButton.centerYAnchor
