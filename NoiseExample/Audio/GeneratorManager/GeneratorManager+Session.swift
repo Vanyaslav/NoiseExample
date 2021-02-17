@@ -15,15 +15,22 @@ extension GeneratorManager {
                                      mode: AVAudioSession.Mode.default,
                                      options: .interruptSpokenAudioAndMixWithOthers)
             guard let format = audioFormat() else { return }
-            
             try session.setPreferredSampleRate(format.sampleRate)
-        } catch let error {
-            NSLog("Failed to set category on AVAudioSession error: %@", error.localizedDescription)
-        }
-        // activate session
-        do { try session.setActive(true) }
-        catch let error {
-            NSLog("Failed to set active session on AVAudioSession error: %@", error.localizedDescription)
-        }
+        } catch let error { process(with: error) }
+    }
+    
+    func deativateSession() {
+        do { try AVAudioSession.sharedInstance().setActive(false) }
+        catch let error { process(with: error) }
+    }
+    
+    func activateSession() {
+        do { try AVAudioSession.sharedInstance().setActive(true) }
+        catch let error { process(with: error) }
+    }
+    
+    private
+    func process(with error: Error) {
+        NSLog("Failed to manage session on AVAudioSession error: %@", error.localizedDescription)
     }
 }

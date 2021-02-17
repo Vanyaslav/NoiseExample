@@ -12,7 +12,7 @@ extension WhiteNoiseGenerator {
         kernelRenderBlock = { buffer in
             func proces(_ out_data: UnsafeMutablePointer<Float32>) {
                 for i in 0 ..< buffer.frameLength {
-                    out_data[Int(i)] = WhiteNoiseGenerator.signal()
+                    out_data[Int(i)] = Self.signal()
                 }
             }
             

@@ -9,13 +9,13 @@ import AVFoundation
 import CoreAudio
 
 class KernelAudioUnit: AUAudioUnit {
-    // MARK: - Private
+    // MARK: Private
     private let _kernel: AudioUnitSampleKernel = AudioUnitSampleKernel()
     
     private var _outputBusArray: AUAudioUnitBusArray!
     private var _internalRenderBlock: AUInternalRenderBlock!
     
-    // MARK: - Override
+    // MARK: Override init
     override init(componentDescription: AudioComponentDescription,
                   options: AudioComponentInstantiationOptions) throws {
         let kernel = self._kernel
@@ -41,7 +41,7 @@ class KernelAudioUnit: AUAudioUnit {
             let out_abl = UnsafeMutableAudioBufferListPointer(outputData)
             let in_abl = UnsafeMutableAudioBufferListPointer(buffer.mutableAudioBufferList)
             
-            for i in 0..<out_abl.count {
+            for i in 0 ..< out_abl.count {
                 let out_data = out_abl[i].mData
                 let in_data = in_abl[i].mData
                 
@@ -68,7 +68,9 @@ class KernelAudioUnit: AUAudioUnit {
             throw error
         }
     }
-    
+}
+// MARK: Overrides
+extension KernelAudioUnit {
     override var outputBusses : AUAudioUnitBusArray {
         return self._outputBusArray
     }
@@ -97,8 +99,10 @@ class KernelAudioUnit: AUAudioUnit {
     override func deallocateRenderResources() {
         _kernel.buffer = nil
     }
-    
-    // MARK: - Accessor
+}
+
+// MARK: Accessor
+extension KernelAudioUnit {
     var kernelRenderBlock: KernelRenderBlock? {
         get { _kernel.renderBlock }
         set { _kernel.renderBlock = newValue }

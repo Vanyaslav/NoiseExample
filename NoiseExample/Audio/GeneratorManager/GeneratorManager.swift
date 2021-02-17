@@ -9,25 +9,29 @@ import AVFoundation
 
 class GeneratorManager {
     private
-    let engine: AVAudioEngine
+    let engine = AVAudioEngine()
     private
-    let unit: AVAudioUnit
+    let audioUnit: AVAudioUnit
     
-    init(with engine: AVAudioEngine = AVAudioEngine(),
-         audioUnit: AVAudioUnit = WhiteNoiseGenerator.loadUnit()) {
-        self.unit = audioUnit
-        self.engine = engine
+    init(with unit: AVAudioUnit = WhiteNoiseGenerator.loadUnit()) {
+        audioUnit = unit
+        initAudioSession()
         // set defaults
         engine.mainMixerNode.outputVolume = defaultVolume
-        
-        do { try self.engine.start() }
-        catch { print(error) ; return }
-        
-        initAudioSession()
+        engine.prepare()
     }
     
     func manageNoise(with state: Bool) {
-        state ? connectUnit() : engine.detach(unit)
+        if state {
+            activateSession()
+            connectUnit()
+            do { try engine.start() }
+            catch { print(error) ; return }
+        } else {
+            engine.detach(audioUnit)
+            engine.pause()
+            deativateSession()
+        }
     }
     
     func manageVolume(with value: Float) {
@@ -36,9 +40,13 @@ class GeneratorManager {
     
     private
     func connectUnit() {
-        engine.attach(unit)
-        engine.connect(unit,
+        engine.attach(audioUnit)
+        engine.connect(audioUnit,
                        to: engine.mainMixerNode,
                        format: nil)
+    }
+    
+    deinit {
+        self.engine.stop()
     }
 }

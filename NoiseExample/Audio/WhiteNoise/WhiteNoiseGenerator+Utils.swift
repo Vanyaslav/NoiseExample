@@ -19,7 +19,7 @@ extension WhiteNoiseGenerator {
     static let registerSubclass: Void = {
         AUAudioUnit.registerSubclass(
             WhiteNoiseGenerator.self,
-            as: WhiteNoiseGenerator.audioComponentDescription,
+            as: audioComponentDescription,
             name: "WhiteNoiseGenerator",
             version: 001
         )
