@@ -16,17 +16,17 @@ extension GeneratorManager {
                                      options: .interruptSpokenAudioAndMixWithOthers)
             guard let format = audioFormat() else { return }
             try session.setPreferredSampleRate(format.sampleRate)
-        } catch let error { process(with: error) }
+        } catch { process(with: error) }
     }
     
     func deativateSession() {
         do { try AVAudioSession.sharedInstance().setActive(false) }
-        catch let error { process(with: error) }
+        catch { process(with: error) }
     }
     
     func activateSession() {
         do { try AVAudioSession.sharedInstance().setActive(true) }
-        catch let error { process(with: error) }
+        catch { process(with: error) }
     }
     
     private
