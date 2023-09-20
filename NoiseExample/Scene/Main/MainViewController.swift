@@ -8,8 +8,7 @@
 import UIKit
 
 class MainViewController: UIViewController {
-    lazy
-    var manageButton: UIButton = {
+    lazy var manageButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.titleLabel?.font = .boldSystemFont(ofSize: 80)
@@ -18,20 +17,19 @@ class MainViewController: UIViewController {
         button.setTitle("Stop", for: .selected)
         
         button.addTarget(self,
-                         action: #selector(manageNoise(_:)),
-                         for: .touchUpInside)
+                         action: #selector(manageNoise),
+                         for: .primaryActionTriggered)
         return button
     }()
     
-    lazy
-    var volumeSlider: UISlider = {
+    lazy var volumeSlider: UISlider = {
         let slider = UISlider()
         slider.translatesAutoresizingMaskIntoConstraints = false
         slider.value = manager.defaultVolume
         slider.tintColor = .secondaryLabel
         
         slider.addTarget(self,
-                         action: #selector(manageVolume(_:)),
+                         action: #selector(manageVolume),
                          for: .valueChanged)
         return slider
     }()
