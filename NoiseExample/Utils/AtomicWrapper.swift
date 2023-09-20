@@ -8,14 +8,16 @@
 import Foundation
 
 @propertyWrapper
-struct Atomic<Value> {
-    private
-    var value: Value
-    private
-    let lock = NSLock()
+class Atomic<Value> {
+    private var value: Value
+    private let lock: NSLock
 
-    init(wrappedValue value: Value) {
+    init(
+        wrappedValue value: Value,
+        lock: NSLock = .init()
+    ) {
         self.value = value
+        self.lock = lock
     }
 
     var wrappedValue: Value {
@@ -23,14 +25,13 @@ struct Atomic<Value> {
       set { store(newValue: newValue) }
     }
 
-    func load() -> Value {
+    private func load() -> Value {
         lock.lock()
         defer { lock.unlock() }
         return value
     }
 
-    mutating
-    func store(newValue: Value) {
+    private func store(newValue: Value) {
         lock.lock()
         defer { lock.unlock() }
         value = newValue
