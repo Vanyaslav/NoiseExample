@@ -10,23 +10,23 @@ import CoreAudio
 
 class KernelAudioUnit: AUAudioUnit {
     // MARK: Private
-    private let _kernel: AudioUnitSampleKernel = AudioUnitSampleKernel()
+    private let kernel: AudioUnitSampleKernel = AudioUnitSampleKernel()
     
-    private var _outputBusArray: AUAudioUnitBusArray!
-    private var _internalRenderBlock: AUInternalRenderBlock!
+    private var outputBusArray: AUAudioUnitBusArray!
+    private var internalRender: AUInternalRenderBlock!
     
     // MARK: Override init
     override init(componentDescription: AudioComponentDescription,
                   options: AudioComponentInstantiationOptions) throws {
-        let kernel = self._kernel
+        let kernel = self.kernel
         
-        self._internalRenderBlock = { (actionFlags,
-                                       timeStamp,
-                                       frameCount,
-                                       outputBusNumber,
-                                       outputData,
-                                       renderEvent,
-                                       pullInputBlock) in
+        internalRender = { (actionFlags,
+                            timeStamp,
+                            frameCount,
+                            outputBusNumber,
+                            outputData,
+                            renderEvent,
+                            pullInputBlock) in
             
             guard let buffer = kernel.buffer else {
                 return noErr
@@ -55,57 +55,49 @@ class KernelAudioUnit: AUAudioUnit {
             return noErr
         }
         
-        do {
-            try super.init(componentDescription: componentDescription, options: options)
-            guard let format = audioFormat() else {
-                abort()
-            }
-            let bus = try AUAudioUnitBus(format: format)
-            self._outputBusArray = AUAudioUnitBusArray(audioUnit: self,
-                                                       busType: AUAudioUnitBusType.output,
-                                                       busses: [bus])
-        } catch {
-            throw error
+        try super.init(componentDescription: componentDescription, options: options)
+        guard let format = audioFormat() else {
+            abort()
         }
+        let bus = try AUAudioUnitBus(format: format)
+        outputBusArray = AUAudioUnitBusArray(audioUnit: self,
+                                             busType: AUAudioUnitBusType.output,
+                                             busses: [bus])
     }
 }
 //
 // MARK: Overrides
 extension KernelAudioUnit {
     override var outputBusses : AUAudioUnitBusArray {
-        return self._outputBusArray
+        outputBusArray
     }
     
     override var internalRenderBlock: AUInternalRenderBlock {
-        return self._internalRenderBlock
+        internalRender
     }
     
     override func shouldChange(to format: AVAudioFormat,
                                for bus: AUAudioUnitBus) -> Bool {
-        return true
+        true
     }
     
     override func allocateRenderResources() throws {
-        do {
-            try super.allocateRenderResources()
-        } catch {
-            throw error
-        }
+        try super.allocateRenderResources()
         //
         let bus = self.outputBusses[0]
-        _kernel.buffer = AVAudioPCMBuffer(pcmFormat: bus.format,
-                                          frameCapacity: self.maximumFramesToRender)
+        kernel.buffer = AVAudioPCMBuffer(pcmFormat: bus.format,
+                                         frameCapacity: self.maximumFramesToRender)
     }
     
     override func deallocateRenderResources() {
-        _kernel.buffer = nil
+        kernel.buffer = nil
     }
 }
 
 // MARK: Accessor
 extension KernelAudioUnit {
     var kernelRenderBlock: KernelRenderBlock? {
-        get { _kernel.renderBlock }
-        set { _kernel.renderBlock = newValue }
+        get { kernel.renderBlock }
+        set { kernel.renderBlock = newValue }
     }
 }
